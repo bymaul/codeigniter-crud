@@ -15,7 +15,9 @@ class PostController extends BaseApiController
 
     public function index()
     {
-        $result = $this->postModel->getPublishedWithAuthors();
+        $limit = $this->request->getGet('limit', FILTER_VALIDATE_INT) ?? 10;
+        $page = $this->request->getGet('page', FILTER_VALIDATE_INT) ?? 1;
+        $result = $this->postModel->getPublishedWithAuthors($limit, $page);
         return $this->respondWithSuccess($result);
     }
 

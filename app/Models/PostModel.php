@@ -32,15 +32,13 @@ class PostModel extends Model
             ->getRowArray();
     }
 
-    public function getPublishedWithAuthors(int $limit = 10)
+    public function getPublishedWithAuthors(int $limit = 10, int $page = 1)
     {
         $total = $this->db->table('posts p')
             ->join('users u', 'u.id = p.user_id')
             ->where('p.status', 'published')
             ->countAllResults();
 
-
-        $page = $this->request?->getVar('page') ?? 1;
         $offset = ($page - 1) * $limit;
 
         $posts = $this->db->table('posts p')
