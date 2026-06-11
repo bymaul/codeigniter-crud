@@ -15,5 +15,8 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
         $routes->post('posts', 'PostController::create');
         $routes->put('posts/(:num)', 'PostController::update/$1');
         $routes->delete('posts/(:num)', 'PostController::delete/$1');
+        $routes->post('posts/(:num)/comments', 'CommentController::create/$1');
+        $routes->put('posts/(:num)/comments/(:num)', 'CommentController::update/$1/$2');
+        $routes->delete('posts/(:num)/comments/(:num)', 'CommentController::delete/$1/$2');
     });
 });

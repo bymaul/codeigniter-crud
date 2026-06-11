@@ -23,7 +23,7 @@ class PostController extends BaseApiController
 
     public function show($id = null)
     {
-        $post = $this->postModel->getPostWithAuthor((int)$id);
+        $post = $this->postModel->getWithRelations((int)$id);
         if (!$post) {
             return $this->respondWithError('Post not found', 404);
         }

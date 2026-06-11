@@ -59,4 +59,19 @@ class PostModel extends Model
             ]
         ];
     }
+
+    public function getWithRelations(int $postId): ?array
+    {
+        try {
+            $post = $this->getPostWithAuthor($postId);
+            if (!$post) return null;
+
+            $commentModel = new CommentModel();
+            $post['comments'] = $commentModel->getByPostWithAuthors($postId);
+        } catch (\Exception $e) {
+            return ['error', 'Failed to fetch post with relations: ' . $e->getMessage()];
+        }
+
+        return $post;
+    }
 }
