@@ -30,4 +30,9 @@ class BaseApiController extends ResourceController
             'data' => $data
         ], $statusCode);
     }
+
+    protected function getAuthUserId(): int
+    {
+        return (int) $this->request->user_id;
+    }
 }

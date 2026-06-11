@@ -19,12 +19,7 @@ class AuthController extends BaseApiController
 
     public function register()
     {
-        $rules = [
-            'name'     => 'required|min_length[2]',
-            'email'    => 'required|valid_email|is_unique[users.email]',
-            'password' => 'required|min_length[8]',
-        ];
-
+        $rules = $this->userModel->getValidationRules();
         if (!$this->validate($rules)) {
             return $this->respondWithError('Validation failed', 422, $this->validator->getErrors());
         }
